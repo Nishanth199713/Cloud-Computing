@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="static/styles.css" rel="stylesheet">
+      <title>Latitude Range Chart</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <h1></h1>
+      <h1>, </h1>
+
+      <br>
+
+      Start:{{start}}<br><br>
+      End:{{end}}<br><br>
+      Result:{{storeResult}}
+	  Rows:{{rows}}
+
+      <center>
+          <div id="piechart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Pie chart showing Total Quakes in each Latitude Range',
+                pieSliceText: 'value',
+                legend: {position: 'labeled'}
+                {#colors: ['yellow','lightgray','orange']#}
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+	
+	<center>
+          <div id="barchart" style="width: 900px; height: 500px;"></div>
+          <div id="columnchart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Bar chart showing Number of Quakes for latitude Ranges ',
+                hAxis: {title: 'Number of Quakes'},
+                vAxis: {title: 'Latitude Range'},
+                colors: ['green','red','yellow','blue','violet','orange','lightgray']
+
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+
+            chart.draw(data, options);
+
+            {#Column Chart#}
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Bar chart showing Number of Quakes for latitude Ranges ',
+                hAxis: {title: 'Latitude Range'},
+                vAxis: {title: 'Number of quakes'},
+                {#legend: { position: "none" }#}
+                colors: ['green','red','yellow','blue','violet','orange','lightgray']
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+		
+		
+	<center>
+      <div id = "scatter" style = "width: 600px; height: 800px; margin: 0 auto"></div>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawsc);
+      function drawsc() {
+
+          var data = google.visualization.arrayToDataTable({{ rows|safe }});
+          var options = {
+              'title': 'Number of Quakes for latitude Ranges',
+              hAxis: {title: 'Latitude Range'},
+              vAxis: {title: 'No Of Quakes'},
+              'width': 550,
+              'height': 400
+          };
+          var chart = new google.visualization.ScatterChart(document.getElementById('scatter'));
+          chart.draw(data, options);
+      }
+      </script>
+
+      <div id="linechart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Line chart showing Number of Earthquakes with differnet magnitudes ',
+                hAxis: {title: 'Magnitude'},
+                vAxis: {title: 'Number of quakes'},
+                pointsVisible: true
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+	  </center>
+  </body>
+</html>

@@ -1,0 +1,241 @@
+
+Name: Revathy Ramamoorthy
+Last 4 digits ID: 3569
+Computer IP address:
+CSE 6331, Cloud Computing					
+
+
+Quiz April 6, Spring 2020   (c) DL, UTA, 2020
+
+
+  C&P means cut and paste only those relevant lines from your program(s) into this quiz.
+
+
+ 1.  I understand that I am on my honor during this quiz, I will not collaborate, use 
+     non-allowed sources, and I will not discuss or share this quiz with anyone for the next 
+     4 hours.
+     You MAY: use Google to search, use previous source code, 
+     YOU MAY NOT use:
+     Email, Facebook, Hangouts, IM, chats, Skype or ANY other human connection.
+
+     This is a timed test. Late tests will have points deducted for being late.
+     Very late tests will not be graded.
+
+     The second part of the test, you should electronically submit, you will need to copy and paste 
+     only those lines of code to implement that part of the test, usually a few (two to eight) lines of code. 
+     Place it immediately after the question.
+
+     Submit this Quiz (renamed) with code cut and pasted, ONLY text. DO NOT submit zips, binaries, libraries,
+     or anything other than text.
+
+     When any parts(questions) are complete complete, submit this test, you may make multiple submissions.
+
+ 2. Get files from this same folder.
+   
+ 3. Name your program/submission with your name and last digits of your ID.
+
+ 4. Using the cloud services provider, all functionality possible should be implemented on that provider.
+    (Of course, displaying web pages through a browser and the user interface is "local")
+
+ 5. Show a web page and interface (which resides on the cloud provider) with your name and 
+    student ID in large font at the top of every web page dispayed (for this quiz)
+    The cloud service provider is Microsoft Azure.
+
+Show and submit code:
+
+ 5. Please read part 5. above, again.
+
+ 6. Import the dataset into a Relational Data Base (SQL), a "hash" or an array. 
+    Please note that for some parts of the following you will need to create indexes (keys) appropriately.
+    You do NOT need to show us this part.
+
+ 7. Allow a user, through a web form, to give a "net" value, for example "pr", and a minimum and maximum "mag"
+    value, for example 3 to 6, and in a table, show the number of quakes for that net value and for that range
+    of mag, in increments of 1, that is, for this example show the number of quakes with mag from 3 to 4, 4 to 5,
+    and 5 to 6, for the net value "pr". (No "visualizing", no graphing necessary).
+
+
+@app.route("/magquakes", methods=["POST", "GET"])
+def magquakes():
+    incrementvalue = float(request.form.get('incrementvalue', ''))
+    net = request.form.get('net', '')
+    latStart = float(request.form.get('latStart', ''))
+    latEnd = float(request.form.get('latEnd', ''))
+    rangeStart = latStart
+    storeResult = []
+    start = []
+    end = []
+    counter = 0
+    while rangeStart < latEnd:
+        #query = "Select count(*) from earthq where latitude between '" +str(rangeStart)+ "' and '" +str(rangeEnd)+"'"
+        query = "Select count(*) from earthq where latitude between '" +str(rangeStart)+ "' and '" +str(rangeEnd)+"' and '" +str(net)+"' "
+        cursor.execute(query)
+        resultSet = cursor.fetchall()
+        countResult = resultSet[0][0]
+        storeResult.append(countResult)
+        start.append(rangeStart)
+        end.append(rangeEnd)
+        rangeStart = rangeEnd
+        rangeEnd = rangeEnd + incrementvalue
+        counter = counter + 1
+    list_a = []
+    list_a.append(['Magnitude Range','Number of Quakes'])
+    for i in range(0,counter):
+        list_a.append([str(start[i]) + '-' + str(end[i]),storeResult[i]])
+    return render_template('magrangeincrequakes.html',start=start,end=end,storeResult=storeResult,rows=list_a)
+
+Display:
+
+	  Start:{{start}}<br><br>
+      End:{{end}}<br><br>
+      Result:{{storeResult}} <br>
+	  Rows:{{rows}}
+
+ 8. Using what was done in the previous question, showing the same web form, please show a page,
+    followed by a horizontal bar chart on that page, which is at least 3/4 (75%) the width of the screen, 
+    which shows the same results as the previous question. Each bar should be in a different color, 
+    please show labels to the right of each bar.
+
+Function code in Question 7
+
+Bar chart: 
+
+<div id="barchart" style="width: 900px; height: 500px;"></div>
+          <div id="columnchart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Bar chart showing Number of Quakes for latitude Ranges ',
+                hAxis: {title: 'Number of Quakes'},
+                vAxis: {title: 'Latitude Range'},
+                colors: ['green','red','yellow','blue','violet','orange','lightgray']
+
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+
+            chart.draw(data, options);
+
+            {#Column Chart#}
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Bar chart showing Number of Quakes for latitude Ranges ',
+                hAxis: {title: 'Latitude Range'},
+                vAxis: {title: 'Number of quakes'},
+                {#legend: { position: "none" }#}
+                colors: ['green','red','yellow','blue','violet','orange','lightgray']
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+
+ 9. Similar, to the previous question, please show a page, followed by a pie chart on that page, 
+    which is half (50%) the width of the screen, which shows the same results as the previous question. 
+    Each pie slice should be in a different color, please show labels inside each slice.
+
+Function code in Question 7
+
+Pie chart:
+	
+<div id="piechart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Pie chart showing Total Quakes in each Latitude Range',
+                pieSliceText: 'value',
+                legend: {position: 'labeled'}
+                {#colors: ['yellow','lightgray','orange']#}
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+
+ 10. Allow a user, through a web form, to give a "net" value, for example "pr", and a minimum and maximum "nst" range, 
+     for example 10 to 18, and show a point chart (scatter chart) where the x axis are nst values, and the y axis are gap values,
+     please label the x and y axis. If the gap values are all greater than some minimum (for this example there are no gap values
+     less than 100), please re-origin the axis, DO NOT start at point 0,0 at the bottom left, you can origin at the minimum nst
+     and gap values, or some values "close" to those.)
+	
+@app.route("/scatter", methods=["POST", "GET"])
+def scatter():
+    rangeStart = int(request.form.get('latStart', ''))
+    rangeEnd = int(request.form.get('latEnd', ''))
+    net = str(request.form.get('net',''))
+    query = "Select nst, gap from earthq where net = '"+str(net)+"' and nst between '" +str(rangeStart)+ "' and '" +str(rangeEnd)+"'"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    maxQuery = "Select count(*) from earthq where net = '"+str(net)+"' and nst between '" +str(rangeStart)+ "' and '" +str(rangeEnd)+"'"
+    cursor.execute(maxQuery)
+    countResult = cursor.fetchall()
+    count = countResult[0][0]
+    list_a = []
+    list_a.append(['nst','gap'])
+    for i in range(0, int(count)):
+        list_a.append([result[i][0], result[i][1]])
+    return render_template('scatter.html', rows=list_a, count=count)
+
+Scatter plot:
+
+<div id="scatterchart" style="width: 900px; height: 500px;"></div>
+      </center>
+
+      <br>
+      <br>
+    </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Scatter chart showing Number of Earthquakes with differnet magnitudes ',
+                hAxis: {title: 'Magnitude'},
+                vAxis: {title: 'Number of quakes'}
+            };
+            var chart = new google.visualization.ScatterChart(document.getElementById('scatterchart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+
+
+ 11. When you are finished with any part, please submit a link (a link to your Azure app) 
+     to Teams, and we will try to demo it, then when you are FINISHED 
+     (or at the end of the class) please submit code to Teams, and terminate your app.
+
+ Good Luck!   
+

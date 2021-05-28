@@ -1,0 +1,4 @@
+  applications:
+  - name: image-app
+    random-route: true
+    memory: 64M

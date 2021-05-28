@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AWS</title>
+
+</head>
+
+<body>
+
+
+<h2>welcome</h2>
+<h1>Revathy Ramamoorthy 1001663569</h1>
+<h2>Cloud Computing</h2>
+<img src="a.jpg" alt="a.jpg" height=100 width=100>
+
+<form action="/p2" method="POST" >
+            <label > </label>
+            <input type="submit" value="submit"><br><br>
+        </form>
+
+<h3>{{ res11 }}</h3><br>
+<h3>request{{ s11 }}</h3><h3>response{{ e11 }}</h3>
+<h3>Elapsed time 1 : {{ ep1 }}</h3>
+<h3>{{ res12 }}</h3><br>
+<h3>request{{ s12 }}</h3><h3>response{{ e12 }}</h3>
+<h3>Elapsed time 2 : {{ ep2 }}</h3>
+<h3>{{ res13 }}</h3><br>
+<h3>request{{ s13 }}</h3><h3>response{{ e13 }}</h3>
+<h3>Elapsed time 3 : {{ ep3 }}</h3>
+
+
+
+
+    <div>
+        <section>
+
+
+        <form action="/noqueries" method="POST" >
+            <label > no of queries </label>
+            <input type="number"  name="no" >
+            <input type="submit" value="submit"><br><br>
+        </form>
+
+            <h3>executed this query {{ times }}times</h3>
+           <!--  <h3>time taken with cache {{ totaltime }}</h3>
+            <h3> avg time with cache {{ avgtime }}</h3> -->
+            <h3>time taken without cache {{ totaltime22 }}</h3>
+            <h3> avg time without cache  {{ avgtime22 }}</h3>
+            <!-- <h3>{{ r }}</h3> -->
+
+        </section>
+
+        <section>
+        <form action="/restqueries" method="POST" >
+            <label > no of queries (restricted mag) </label>
+            <input type="number"  name="n" >
+            <input type="text"  name="m1" >
+            <input type="text"  name="m2" >
+            <input type="submit" value="submit"><br>
+            <h3>executed this query {{ times3 }}times</h3>
+            <!-- <h3>time taken with cache {{ totaltime3 }}</h3>
+            <h3> avg time with cache {{ avgtime3 }}</h3> -->
+            <h3>time taken without cache {{ totaltime33 }}</h3>
+            <h3> avg time without cache  {{ avgtime33 }}</h3>
+        </form>
+        </section>
+
+        <section>
+        <form action="/restqueries2" method="POST" >
+            <label > no of queries (restricted mag with loc) </label>
+            <input type="number"  name="n2" >
+            <input type="text"  name="mg1" >
+            <input type="text"  name="mg2" >
+            <input type="submit" value="submit"><br>
+            <h3>executed this query {{ times4 }}times</h3>
+            <!-- <h3>time taken with cache {{ totaltime4 }}</h3>
+            <h3> avg time with cache {{ avgtime4 }}</h3> -->
+            <h3>time taken without cache {{ totaltime44 }}</h3>
+            <h3> avg time without cache  {{ avgtime44 }}</h3>
+        </form>
+        </section>
+
+        <section>
+        <form action="/restqueries3" method="POST" >
+            <label > no of queries (depth err and place time) </label>
+            <input type="number"  name="n2" >
+            <input type="text"  name="mg1" >
+            <input type="text"  name="mg2" >
+            <input type="submit" value="submit"><br>
+            <h3>executed this query {{ times5 }}times</h3>
+            <!-- <h3>time taken with cache {{ totaltime4 }}</h3>
+            <h3> avg time with cache {{ avgtime4 }}</h3> -->
+            <h3>time taken without cache {{ totaltime55 }}</h3>
+            <h3> avg time without cache  {{ avgtime55 }}</h3>
+        </form>
+        </section>
+
+
+    </div>
+</body>
+
+
+</html>
+
+

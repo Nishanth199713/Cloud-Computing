@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+     <title>Show</title>
+ </head>
+ <body>
+   <div class="container">
+ 
+    
+    <h1>Name:Nishanth Shanmugasundaram</h1>
+    <h1>Studenr ID:1001757727</h1>
+ 
+     <br>
+ 
+     <center>
+         <div id="piechart1" style="width: 900px; height: 500px;"></div>
+     </center>
+     <center>
+         <div id="piechart2" style="width: 900px; height: 500px;"></div>
+     </center>
+ 
+     <br>
+     <br>
+   </div>
+       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <script type="text/javascript">
+         google.charts.load('current', {'packages':['corechart']});
+         google.charts.setOnLoadCallback(drawChart);
+ 
+         function drawChart() {
+ 
+           var data = google.visualization.arrayToDataTable({{ rows|safe }});
+ 
+           var options = {
+               title: ' Pie chart showing Number of Earthquakes in a given range',
+               pieSliceText: 'none',
+               legend: {position: 'labeled'}
+               // {#colors: ['yellow','lightgray','orange']#}
+           };
+           var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
+ 
+           chart.draw(data, options);
+         }
+       </script>
+ </body>
+</html>

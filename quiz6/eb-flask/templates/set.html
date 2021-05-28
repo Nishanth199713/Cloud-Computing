@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+           <h1>1001663569 Revathy, Ramamoorthy</h1>
+            <br>
+
+             <p>***********************************************************************************************************************************************************************</p>
+            <br>
+            
+        <div>
+        <hr/>
+        <div>
+            <form action="http://imageapp-env.eba-7dgn6rng.us-east-2.elasticbeanstalk.com/timer" method="GET or POST" >
+
+                <div>
+                        Start value:
+                        <input type = "number" name = "startvalue">
+                        <br>
+                        Increment: 
+                        <input type="radio" name="change" value="add">
+                        <br>
+                        Decrement:
+                        <input type="radio" name="change" value="minus">
+                        <br>
+                    <button type = "submit" formtarget = "_blank">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        var title = document.getElementById("title");
+        var current = new Date();
+        var time = "Time: " + current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+        document.getElementById("time").innerHTML = time;
+
+    </script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+     <title>Bar Chart</title>
+ </head>
+ <body>
+   <div class="container">
+ 
+     <h1 align="center"> NISHANTH SHANMUGASUNDARAM</h1>
+     <h2 align="center"> 1001757727</h2>
+ 
+     <br>
+ 
+     <center>
+         <div id="columnchart" style="width: 900px; height: 500px;"></div>
+     </center>
+ 
+     <br>
+     <br>
+   </div>
+       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <script type="text/javascript">
+         google.charts.load('current', {'packages':['corechart']});
+         google.charts.setOnLoadCallback(drawChart);
+ 
+         function drawChart() {
+           {#Column Chart#}
+ 
+           var data = google.visualization.arrayToDataTable({{ rows1|safe }});
+ 
+           var options = {
+               title: ' Bar chart showing Number of Earthquakes with differnet magnitudes ',
+               hAxis: {title: 'Elev'},
+               vAxis: {title: 'Volcano_name'},
+               {#legend: { position: "none" }#}
+               colors: ['green','red','yellow','blue','violet','orange','lightgray']
+           };
+ 
+           var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+ 
+           chart.draw(data, options);
+         }
+       </script>
+ </body>
+</html>

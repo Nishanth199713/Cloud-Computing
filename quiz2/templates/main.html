@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>Home</title>
+    {% endif %}
+
+  </head>
+  <body>
+    <div class="container">
+
+      <h1> 1001663569 Ramamoorthy, Revathy </h1>
+
+      <br>
+      <br>
+
+<!--       <center>
+      {#{% if table is not None %}#}
+          <table>
+            <thead>
+                  <th> Time </th>
+                  <th> Latitude </th>
+                  <th> Longitude </th>
+                  <th> Depth </th>
+                  <th> Magnitude </th>
+                  <th> Magnitude Type </th>
+                  <th> NST </th>
+                  <th> Gap </th>
+                  <th> DMin </th>
+                  <th> RMS </th>
+                  <th> Net </th>
+                  <th> ID </th>
+                  <th> Updated </th>
+                  <th> Place </th>
+                  <th> Type </th>
+                  <th> Horizontal Error </th>
+                  <th> Depth Error </th>
+                  <th> Magnitude Error </th>
+                  <th> Magnitude NST </th>
+                  <th> Status </th>
+                  <th> Location Source </th>
+                  <th> Magnitude Source </th>
+            </thead>
+
+            <tbody>
+              {% for value in table %}
+            <tr>
+                  <td> {{ value[0] }} </td>
+                  <td> {{ value[1] }} </td>
+                  <td> {{ value[2] }} </td>
+                  <td> {{ value[3] }} </td>
+                  <td> {{ value[4] }} </td>
+                  <td> {{ value[5] }} </td>
+                  <td> {{ value[6] }} </td>
+                  <td> {{ value[7] }} </td>
+                  <td> {{ value[8] }} </td>
+                  <td> {{ value[9] }} </td>
+                  <td> {{ value[10] }} </td>
+                  <td> {{ value[11] }} </td>
+                  <td> {{ value[12] }} </td>
+                  <td> {{ value[13] }} </td>
+                  <td> {{ value[14] }} </td>
+                  <td> {{ value[15] }} </td>
+                  <td> {{ value[16] }} </td>
+                  <td> {{ value[17] }} </td>
+                  <td> {{ value[18] }} </td>
+                  <td> {{ value[19] }} </td>
+                  <td> {{ value[20] }} </td>
+                  <td> {{ value[21] }} </td>
+                  <td> {{ value[22] }} </td>
+                  
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      {#{% else %}#}
+          {#<div>No data available</div>#}
+      {#{% endif %}#}
+        </center>
+
+ 
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+      <br>
+      <br>
+
+      <h4> 
+        Upload file to IBM DB
+      </h4> <br>
+      <form action="/upload" method="POST" >
+        <label> File:</label> <input type="file" name="file" accept="static/*"> 
+        <input type="submit" name="upload" value="Upload" class="btn btn-primary">
+        <br>
+        <br>
+        <label> CSV File:</label> <input type="file" name="csvfile" accept="static/*"> 
+        <input type="submit" name="upload" value="Upload" class="btn btn-primary">
+      </form>
+      <br> -->
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <form action="/greaterthan" method="POST" >
+        <label> Search Magnitude greater than: </label> <input type="number" name="range1" step="any"> 
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Determine earthquakes within specified range of magnitude for one week, a range of days or the whole 30 days.
+      </h4> <br>
+      <form action="/withinrange" method="POST" >
+        <label> Magnitude </label> <br>
+        <label> From:</label> <input type="number" name="magrange1" step="any"> <br>
+        <label> To: </label> <input type="number" name="magrange2" step="any"> <br>
+        <label> Date Range </label> <br>
+        <label> From: </label> <input type="text" name="startdate" placeholder="2019-06-12"> <br>
+        <label> To: </label> <input type="text" name="enddate" placeholder="2019-06-12"> <br>     
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+
+       
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Determine earthquakes near a specific location
+        when location and distance is given
+      </h4> <br>
+      <form action="/locationdist" method="POST" >
+        <label> Location</label> <input type="text" name="location" step="any"><br>
+       <!--  <label> Latitude:</label> <input type="number" name="lat" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="long" step="any"> <br> -->
+        <label> Distance:</label> <input type="number" name="dist" step="any"><label>Kms</label> <br> <br>
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Do large (>4.0 mag) occur more often at night (6PM to 6AM)? Find out by entering the Magnitude here
+      </h4> <br>
+      <form action="/nightquake" method="POST" >
+        <!-- <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon2" step="any"> <br> -->
+        <label> Magnitude: </label> <input type="number" name="magnitude" step="any"> <br> <br>
+        <input type="submit" value="Find out" class="btn btn-primary"> 
+      </form>
+      <br>
+      
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Determine earthquakes near a specific location
+        when location and range of magnitude is given
+      </h4> <br>
+      <form action="/locationmag" method="POST" >
+        <label> Location</label> <input type="text" name="location" step="any"><br>
+        <!-- <label> Latitude:</label> <input type="number" name="latitude" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude" step="any"> <br> -->
+        <label> Magnitude </label> <br>
+        <label> From:</label> <input type="number" name="magrange1" step="any"> <br>
+        <label> To:</label> <input type="number" name="magrange2" step="any"> <br> <br>
+        <input type="submit" value="Search" class="btn btn-primary">  
+      </form>
+      <br>
+
+     
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Find clusters of earthquakes
+      </h4> <br>
+
+      <form action="/" method="POST" >
+        <label> Earthquake between a range </label> <br>
+        <input type="number" name="range" step="any"> <br> <br>
+        <input type="submit" value="Search Cluster" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <form action="/" method="POST" >
+        <label> Latitude:</label> <input type="number" name="latitude" step="any"> <br>
+        <label> Range:</label> <input type="number" name="magrange1" step="any"> <br> <br>
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+      <br>
+
+      <form action="/" method="POST" >
+        <label> Latitude:</label> <input type="number" name="latitude" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude" step="any"> <br>
+        <label> Range:</label> <input type="number" name="magrange1" step="any"> <br> <br>
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+      <p> Minumum magnitude greater than a specific value <p>
+      <form action="/magsmallgreat" method="POST" >
+        <!-- <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon2" step="any"> <br> -->
+        <label> Magnitude: </label> <input type="number" name="magnitude" step="any"> <br> <br>
+        <input type="submit" value="Find magsmallgreat" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+      <p>Depth range and increment value </p>
+
+      <form action="/depthrangeincrement" method="POST" >
+        <label> Depth </label> <br>
+        <label> Range1:</label> <input type="number" name="depthrange1" step="any"> <br>
+        <label> Range2: </label> <input type="number" name="depthrange2" step="any"> <br>
+        <label> Increment:</label> <input type="number" name="increment"> <br>
+        <input type="submit" value="Run Increment" class="btn btn-primary"> 
+      </form>
+
+      <br>
+
+      <p>Magnitude range and increment value </p>
+
+      <form action="/magrangeincrement" method="POST" >
+        <label> Magnitude </label> <br>
+        <label> Range1:</label> <input type="number" name="magrange1" step="any"> <br>
+        <label> Range2: </label> <input type="number" name="magrange2" step="any"> <br>
+        <label> Increment:</label> <input type="number" name="increment"> <br>
+        <label> Net:</label> <input type="text" name="netvalue" step="any"> <br>
+        <input type="submit" value="Run Increment" class="btn btn-primary"> 
+      </form>
+
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+      <p> Updating magnitude of records in a given depth range and date range </p>
+
+      <form action="/update" method="POST" >
+        <label> Date Range </label> <br>
+        <label> From: </label> <input type="text" name="startdate" placeholder="2019-06-12"> <br>
+        <label> To: </label> <input type="text" name="enddate" placeholder="2019-06-12"> <br>  
+        <label> Depth </label> <br>
+        <label> From:</label> <input type="number" name="depthrange1" step="any"> <br>
+        <label> To: </label> <input type="number" name="depthrange2" step="any"> <br>   
+        <label> Magnitude: </label> <input type="number" name="mag" step="any"> <br>   
+        <input type="submit" value="Search" class="btn btn-primary"> 
+      </form>
+      <br>
+
+       <p>***********************************************************************************************************************************************************************</p>
+
+      <h4> 
+        Giving 2 location values and displaying the list of every earthquake in that area
+      </h4> <br>
+      <form action="/morequakes" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="lat2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="lon2" step="any"> <br>
+        <label> Magnitude: </label> <input type="number" name="mag" step="any"> <br>
+        <input type="submit" value="Find out" class="btn btn-primary"> 
+      </form>
+      <br>
+      
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <p> Maximum magnitude and total number of quakes within a given depth range <p>
+      <form action="/totandmaxmag" method="POST" >
+        <label> Depth </label>
+        <label> Range1 : </label> <input type="number" name="depthrange1" step="any"> <br>
+        <label> Range 2: </label> <input type="number" name="depthrange2" step="any"> <br>
+        <label> Netvalue: </label> <input type="text" name="net" step="any"> <br> <br>
+        <input type="submit" value="Find maxmag and tot quakes" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+      <h4>Q7</h4>
+      <p> Country code and details <p>
+      <form action="/countrycode" method="POST" >
+        <label> Countrycode : </label> <input type="text" name="countrycode" step="any"> <br>
+        <input type="submit" value="Get country details" class="btn btn-primary"> 
+      </form>
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4>Q8</h4>
+      <p> Box - Latlong pair and country names <p>
+      <form action="/box" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <input type="submit" value="Get box details" class="btn btn-primary"> 
+      </form>
+
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <h4>Q9</h4>
+      <p> Bounding box <p>
+      <form action="/boundingbox" method="POST" >
+        <label> Location 1</label> <br>
+        <label> x:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> y:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <label> Magnitude: </label> <input type="number" name="magnitude" step="any"> <br>
+        <input type="submit" value="Get bounding box details" class="btn btn-primary"> 
+      </form>
+      <br>
+
+       <p>***********************************************************************************************************************************************************************</p>
+
+      <h4>Q10</h4>
+      <p> NST Mag range <p>
+      <form action="/nstmagrange" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <label> NST Range </label> <br>
+        <label> Range1: </label> <input type="number" name="nstrange1" step="any"> <br>
+        <label> Range2: </label> <input type="number" name="nstrange2" step="any"> <br>
+        <label> Magnitude Range </label> <br>
+        <label> Mag Range1: </label> <input type="number" name="magStart" step="any"> <br>
+        <label> Mag Range2: </label> <input type="number" name="magEnd" step="any"> <br>
+        <input type="submit" value="Get details" class="btn btn-primary"> 
+      </form>
+      <br>
+
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <p> Search in Radius<p>
+      <form action="/searchinradius" method="POST" >
+        <label> Latitude:</label> <input type="number" name="latitude" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude" step="any"> <br>
+        <label> Radius:</label> <input type="number" name="radius" step="any"> <br>
+        <input type="submit" value="Get details" class="btn btn-primary"> 
+      <br>
+      <br>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  </body>
+</html>

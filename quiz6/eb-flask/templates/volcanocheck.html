@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <link href="styles.css" rel="stylesheet">
+      <title>Check Volcano Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>  </h1>
+        <h1>  </h1>
+        <br>
+        <p>No. of rows: {{rowcount}}</p>
+        <!-- <p>Total Time: {{elapsed_time}}</p> -->
+        <center>
+            {#{% if rows is not None %}#}
+   <table style="padding: 5px;text-align: left;">
+            <tr>
+                  
+                  <th>Volcano Name</th>
+                  
+                  <th>Latitude</th>
+				  <th>Longitude</th>
+				 
+            </tr>
+            {% for rows in rows %}
+                <tr>
+                  
+                  <td> {{ rows['VolcanoName'] }} </td>
+          
+                  <td> {{ rows['Latitude'] }} </td>
+				  <td> {{ rows['Longitude'] }} </td>
+			
+            </tr>
+            {% endfor %}
+        </table>
+            {#{% else %}#}
+            {#<div>No data available</div>#}
+            {#{% endif %}#}
+        </center>
+
+        <h4>
+                 Update Volcano Name
+            </h4> <br>
+            <form action="/volcanoupdate" method="POST">
+            <label> Volcano number: </label> <input type="number" name="vno" step="any"> <br>
+            <label> New name: </label> <input type="text" name="newname" step="any"> <br>
+            <input type="submit" value="Update" class="btn btn-primary">
+            </form>
+            <br>
+        <br>
+        <br>
+    </div>
+</body>
+</html>

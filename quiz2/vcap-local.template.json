@@ -1,0 +1,16 @@
+{
+    "services": {
+      "cloudantNoSQLDB": [
+        {
+          "credentials": {
+            "username":"zll04451",
+            "password":"n2qrf8kxht5c^kfq",
+            "host":"dashdb-txn-sbox-yp-lon02-02.services.eu-gb.bluemix.net"
+          },
+          "label": "cloudantNoSQLDB"
+        }
+      ]
+    }
+  }
+
+# Enter the host name username/host and password---deleted for security purposes

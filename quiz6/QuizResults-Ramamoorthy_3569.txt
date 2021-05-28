@@ -1,0 +1,215 @@
+
+Name:Revathy Ramamoorthy
+Last 4 digits ID: 3569
+Computer IP address:
+CSE 6331, Cloud Computing					
+
+
+Quiz May 4, Spring 2020   (c) DL, UTA, 2020
+
+
+  C&P means cut and paste only those relevant lines from your program(s) into this quiz.
+
+
+ 1.  I understand that I am on my honor during this quiz, I will not collaborate, use 
+     non-allowed sources, and I will not discuss or share this quiz with anyone for the next 
+     4 hours.
+     You MAY: use Google to search, use previous source code, 
+     YOU MAY NOT use:
+     Email, Facebook, Hangouts, IM, chats, Skype or ANY other human connection.
+
+     This is a timed test. Late tests will have points deducted for being late.
+     Very late tests will not be graded.
+
+     The second part of the test, you should electronically submit, you will need to copy and paste 
+     only those lines of code to implement that part of the test, usually a few (two to eight) lines of code. 
+     Place it immediately after the question.
+
+     Submit this Quiz (renamed) with code cut and pasted, ONLY text. DO NOT submit zips, binaries, libraries,
+     or anything other than text.
+
+     When any parts(questions) are complete complete, submit this test, you may make multiple submissions.
+
+ 2. Get files from this same folder.
+   
+ 3. Name your program/submission with your name and last digits of your ID.
+
+ 4. Using the cloud services provider, all functionality possible should be implemented on that provider.
+    (Of course, displaying web pages through a browser and the user interface is "local")
+
+ 5. Show a web page and interface (which resides on the cloud provider) with your full name and 
+    student ID in large font at the top of every web page dispayed (for this quiz)
+    The cloud service provider is AWS (Amazon Web Services).
+
+Show and submit code:
+
+ 5. Please read part 5. above, again.
+    Note: Due to (rather obvious) conditions, anything you have running "locally", we can not see.
+    If you do wish to submit anything that ONLY runs locally, please append your code after the question
+    below, (same as for clod implementation code). 
+    If appropriate, you are welcome to submit "screen shots", if they are in a "MS Word", (or compatible) format,
+    or PDF. We can not read other formats.
+
+ 6. On the cloud provider you will "host" two web pages, one called "Set", the other called "Display". 
+    The Set page will allow a user to set a start value (for example 0 or 1000000) and an Increment and a Decrement
+    button (or check box or similar) where only Increment OR Decrement may be selected. 
+    On the Display page, in either a different browser or a different tab, (perhaps on a different computer), 
+    you will show the start value counting up (increment) or down (decrement). 
+    Please also show time of day (in hours, minutes and seconds) in a large font at the top of the screen 
+    (as well as your name and student ID)
+    Also on the Display page, show a "reset" button (on that web page) where we can reset the counter value 
+    to zero ("0") (put anywhere on the page).
+    Please DO NOT combine these two web pages into one, you may have links that go from one page to the other, 
+    or if you wish have a third page that links to these two (Set and Display).
+
+Set :
+           <div>
+                        Input a start value:
+                        <input type = "number" name = "startvalue">
+                        <br>
+                        Increment: 
+                        <input type="radio" name="change" value="add">
+                        <br>
+                        Decrement:
+                        <input type="radio" name="change" value="minus">
+                        <br>
+                    <button type = "submit" formtarget = "_blank">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        var title = document.getElementById("title");
+        var current = new Date();
+        var time = "Time: " + current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+        document.getElementById("time").innerHTML = time;
+
+    </script>
+
+
+Display :
+
+<body>
+<br>
+            <h1><p id="demo"></p></h1>
+            <p id="demo1"></p>
+
+            <script>
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+document.getElementById("demo").innerHTML = time;
+</script>
+
+<br>
+    
+<div class="container">
+  <h1><div id="counter"></div></h1>
+  <button onclick="res()">Reset counter</button>
+  <script language="JavaScript">
+    let counter = document.getElementById('counter');
+    let count = -1
+
+
+    var count_event = setInterval(myCounter, 300);
+
+
+    function res() {
+      count = 0;
+    }
+
+
+    function myCounter() {
+      count += 1;
+      counter.innerHTML = count.toString();
+    }
+
+
+    function myTimer() {
+      var d = new Date();
+      time.innerHTML = d.toLocaleTimeString();
+    }
+  </script>
+
+
+    </div>
+
+
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 7. Please import the data from the file "v.csv" into a relational table/data base. Then you will create a web
+    interface to allow someone to enter either (you will implement both, a user will chose option 1 or 2): 
+ 
+1. a "Number" (the first column, a volcano number) and you will show the Volcano Name, Latitude and Longitude
+       for that number (if one exists), and allow a user to modify (change) the Volcano Name
+    
+@application.route("/volcanocheck", methods=["POST", "GET"])
+def volcanocheck():
+
+    vno = int(request.form['vno'])
+
+    start_time = time.time()
+
+    sql1 = "SELECT VolcanoName, Latitude, Longitude FROM volcano WHERE Num= '" + str(vno) +"'"
+    cursor.execute(sql1)
+    rows = cursor.fetchall()
+
+    if rows is not None:
+        pass
+
+    end_time = time.time()
+    elapsed_time = end_time-start_time
+
+    return render_template("volcanocheck.html", rows=rows,rowcount=len(rows),elapsed_time=elapsed_time)
+
+@application.route("/volcanoupdate", methods=["POST", "GET"])
+def volcanoupdate():
+
+    vno = int(request.form['vno'])
+    newname = request.form['newname']
+
+    sql1 = "UPDATE volcano set VolcanoName= '"+str(newname)+"'' WHERE Num= '" + str(vno) +"'"
+    cursor.execute(sql1)
+    sql10 = "COMMIT"
+    cursor.execute(sql10)
+
+    sql2 = "SELECT VolcanoName, Latitude, Longitude FROM volcano WHERE Num= '" + str(vno) +"'"
+    cursor.execute(sql2)
+    rows = cursor.fetchall()
+
+    return render_template("volcanoupdate.html", rows=rows,rowcount=len(rows))
+
+
+
+2. A "bounding box" ("upper left hand", or corner, Latitude and Longitude, then opposite corner "lower right hand",
+       Latitude and Longitude) (that is a pair of (Latitude, Longitude) values, such as ((1, 10), (100, 120)), and you will 
+       display Number, Country, Latitude and Longitude for all volcanos within that area (bounding box).
+
+@application.route('/box', methods=['POST'])
+def box():
+    latitude1 = request.form['latitude1']
+    longitude1 = request.form['longitude1']
+    latitude2 = request.form['latitude2']
+    longitude2 = request.form['longitude2']
+    start_time = time.time()
+    query1 = "SELECT * from volcano where Latitude BETWEEN '"+ latitude1 + "' AND  '"+ latitude2 + "' AND Longitude BETWEEN '"+ longitude1 +"' AND '"+ longitude2 + "'"
+    cursor.execute(query1)
+    rows = cursor.fetchall()
+    end_time = time.time()
+    elapsed_time = end_time-start_time
+
+    return render_template('box.html',rows=rows, rowcount=len(rows),elapsed_time=elapsed_time)
+
+3. Similar to part 6, we would like to have two browser tabs open so that we may modify a value in part 1, on one tab,
+       then see it change (when refreshed, or better, automatically) on the other tab.
+
+	SHOWN
+
+ 8.  When you are finished with any part, please submit a link (a link to your AWS app) 
+     to Teams, and we will try to demo it, then when you are FINISHED 
+     (or at the end of the class) please submit code to Teams, and terminate your app.
+
+ Good Luck!   
+

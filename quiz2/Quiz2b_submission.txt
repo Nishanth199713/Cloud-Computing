@@ -1,0 +1,229 @@
+
+Name:Revathy Ramamoorthy
+Last 4 digits ID: 3569
+Computer IP address:
+CSE 6331, Cloud Computing					
+
+
+Quiz Q2 Rerun (Replay), Spring 2020   (c) DL, UTA, 2020
+
+PLEASE NOTE THE MODIFICATIONS AT THE END OF THIS QUIZ. QUESTION 9 AND 10 HAVE BEEN SLIGHTLY MODIFIED.
+
+  C&P means cut and paste only those relevant lines from your program(s) into this quiz.
+
+
+ 1.  I understand that I am on my honor during this quiz, I will not collaborate, use 
+     non-allowed sources, and I will not discuss or share this quiz with anyone for the next 
+     4 hours.
+     You MAY: use Google to search, use previous source code, 
+     YOU MAY NOT use:
+     Email, Facebook, Hangouts, IM, chats, Skype or ANY other human connection.
+
+     This is a timed test. Late tests will have points deducted for being late.
+     Very late tests will not be graded.
+
+     When you are complete, with any part, please raise your hand, so we may visually inspect that part.
+
+     The second part of the test, you should electronically submit, you will need to copy and paste 
+     only those lines of code to implement that part of the test, usually a few (two to eight) lines of code. 
+     Place it immediately after the question.
+
+     Submit this Quiz (renamed) with code cut and pasted, ONLY text. DO NOT submit zips, binaries, libraries,
+     or anything other than text.
+
+     When any parts(questions) are complete complete, submit this test, you may make multiple submissions.
+
+     If you have computer, or other, problems, please raise your hand immediately.
+
+     If you understand and agree, please initial here:
+     _________________
+
+ 2. Get files from this same folder.
+   
+ 3. Name your program/submission with your name and last digits of your ID.
+
+ 4. Using the cloud services provider, all functionality possible should be implemented on that provider.
+    (Of course, displaying web pages through a browser and the user interface is "local")
+
+Show and submit code:
+
+ 5. Show a web page and interface (which resides on the cloud provider) with your name and 
+    student ID in large font at the top of every web page dispayed (for this quiz)
+    The cloud service provider is IBM Cloud (BlueMix). Only show (demo) this seperately if you are not 
+    showing any of the next parts. 
+
+ 6. Import quakes.csv and latlong.csv into tables in a Relational Data Base (SQL), if you have already done this, 
+    (briefly) explain/describe how you did this. Please note that for some parts of the following you will need 
+    to create indexes (keys) appropriately. Please do not change the values in latitude and longitude.
+
+ 7. Allow a user, through a web form, to give a two letter country code and display, on a web page, the name of that
+    country as well as the latitude and longitude.
+
+	@app.route("/countrycode", methods=["POST", "GET"])
+	def countrycode():
+	countrycode = request.form.get("countrycode")
+	listofdata = []
+
+	query2 = "SELECT LATITUDE,LONGITUDE,NAME FROM LATLONG WHERE COUNTRY = '"+str(countrycode)+"'"
+	stmt2 = ibm_db.exec_immediate(conn, query2)
+	result2 = ibm_db.fetch_both(stmt2)
+	while result2:
+		listofdata.append(result2)
+		result2 = ibm_db.fetch_both(stmt2)
+
+	return render_template('countrycode.html', table=listofdata, title='Countrycode')
+
+
+      <h4>Q7</h4>
+      <p> Country code and details <p>
+      <form action="/countrycode" method="POST" >
+        <label> Countrycode : </label> <input type="text" name="countrycode" step="any"> <br>
+        <input type="submit" value="Get country details" class="btn btn-primary"> 
+      </form>
+    
+ 8. Allow a user, through a web form, to give a two latitude and longitude pairs, which form a "box" 
+    (for example upper left and lower right "corners") and display the names of all coutries within 
+    that "bounding" box.
+	
+@app.route('/box', methods=['POST'])
+def box():
+    latitude1 = request.form['latitude1']
+    longitude1 = request.form['longitude1']
+    latitude2 = request.form['latitude2']
+    longitude2 = request.form['longitude2']
+    listofdata = []
+    query1 = "SELECT COUNTRY, NAME from LATLONG where LATITUDE BETWEEN '"+ latitude1 + "' AND  '"+ latitude2 + "' AND LONGITUDE BETWEEN '"+ longitude1 +"'       AND '"+ longitude2 + "'"
+    stmt1 = ibm_db.exec_immediate(conn, query1)
+    result = ibm_db.fetch_both(stmt1)
+    while result:
+    	listofdata.append(result)
+    	result = ibm_db.fetch_both(stmt1)
+
+    return render_template('box.html',table=listofdata, rowcount=len(listofdata))
+
+      <h4>Q8</h4>
+      <p> Box - Latlong pair and country names <p>
+      <form action="/box" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <input type="submit" value="Get box details" class="btn btn-primary"> 
+      </form>
+
+ 9. Allow a user, through a web form, to give a two latitude and longitude pairs, which form a "box" 
+    (for example upper left and lower right "corners") and a magnitude and for all earthquakes within that
+    "bounding" box, that are greater than (or equal to) that magnitude, display the place, then the latitude, 
+    longitude, and time for all quakes within that "bounding" box.
+
+@app.route('/boundingbox', methods=['POST'])
+def boundingbox():
+    latitude3 = request.form['latitude1']
+    longitude3 = request.form['longitude1']
+    latitude2 = request.form['latitude2']
+    longitude2 = request.form['longitude2']
+    magnitude = request.form['magnitude']
+    latitude1 = latitude3+latitude2
+    longitude1 = longitude3+longitude2
+    listofdata = []
+    query1 = "SELECT * from EARTHQ where LATITUDE BETWEEN '"+ latitude1 + "' AND  '"+ latitude2 + "' AND LONGITUDE BETWEEN '"+ longitude1 +"' AND '"+ longitude2 + "' AND MAG >= '"+ magnitude +"'"
+    stmt1 = ibm_db.exec_immediate(conn, query1)
+    result = ibm_db.fetch_both(stmt1)
+    while result:
+    	listofdata.append(result)
+    	result = ibm_db.fetch_both(stmt1)
+
+    return render_template('boundingbox.html',table= listofdata, rowcount=len(listofdata))
+
+      <h4>Q9</h4>
+      <p> Bounding box <p>
+      <form action="/boundingbox" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <label> Magnitude: </label> <input type="number" name="magnitude" step="any"> <br>
+        <input type="submit" value="Get bounding box details" class="btn btn-primary"> 
+      </form>
+      <br>
+
+ 10. Allow a user, through a web form, to give a nst range (for example 10 to 100), as well as  
+     two latitude and longitude pairs, ("box") and for magnitudes between 1 and 20, display the number 
+     of quakes in intervals of 1, that is the number of quakes from 1 to 2, 2 to 3, etc, up to 19 to 20.
+	
+@app.route("/nstmagrange", methods=["POST", "GET"])
+def nstmagrange():
+    type = "earthquake"
+    latitude1 = request.form['latitude1']
+    longitude1 = request.form['longitude1']
+    latitude2 = request.form['latitude2']
+    longitude2 = request.form['longitude2']
+    magStart = float(request.form['magStart'])
+    magEnd = float(request.form['magEnd'])
+    nstrange1  = request.form['nstrange1']
+    nstrange2  = request.form['nstrange2']
+    start = magStart
+    counts = []
+    starts = []
+    ends = []
+    end = start + 1
+    while end <= magEnd:
+        end = start + 1
+        selectQuery = "SELECT * from EARTHQ where LATITUDE BETWEEN '"+ latitude1 + "' AND  '"+ latitude2 + "' AND LONGITUDE BETWEEN '"+ longitude1 +"' AND '"+ longitude2 + "' and MAG >= '"+ str(start) +"' AND MAG <= '" + str(end)+"' AND NST BETWEEN '"+ nstrange1 +"' AND '"+ nstrange2 + "'"
+        selectStmt = ibm_db.exec_immediate(conn, selectQuery)
+        rows = []
+        count = 0
+        result = ibm_db.fetch_assoc(selectStmt)
+        starts.append(start)
+        ends.append(end)
+        while result != False:
+            count = count + 1
+            rows.append(result.copy())
+            result = ibm_db.fetch_assoc(selectStmt)
+        counts.append(count)
+        start = end
+    length = len(starts)
+    return render_template('nstmagrange.html', starts=starts,ends=ends,counts=counts,length=length)
+
+
+	<h4>Q10</h4>
+      <p> NST Mag range <p>
+      <form action="/nstmagrange" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <label> NST Range </label> <br>
+        <label> Range1: </label> <input type="number" name="nstrange1" step="any"> <br>
+        <label> Range2: </label> <input type="number" name="nstrange2" step="any"> <br>
+        <label> Magnitude Range </label> <br>
+        <label> Mag Range1: </label> <input type="number" name="magStart" step="any"> <br>
+        <label> Mag Range2: </label> <input type="number" name="magEnd" step="any"> <br>
+        <input type="submit" value="Get details" class="btn btn-primary"> 
+      </form>
+      <br>
+
+ 11. Show GTA parts (5, 6 not necessary), 7, 8, 9, 10
+     (as soon as you complete any part.)
+
+ 12. When complete, return (send) this quiz
+     If you finish early, send this immediately, otherwise send between
+     the end of class and no more than 1 minute after that.
+
+ NEW-NEW-NEW
+  5. and 6. Do NOT show, UNLESS those are the only parts completed.
+  7. and 8. Use the latlong.csv import into SQL.
+  9. Modify: Given a single latitude and longitude, as well as as X, and Y values (which are added to lat and long
+       values to form a bounding box, they will be in kilometers, and may be positive or negative),
+       and a magnitude, display as in original question. 
+  10. Given a bounding box, as in the previous question (9, above),
+        as well as a magnitude range (for example, from 2 to 5), show ALL quakes in intervals of 1, (for this example
+        for 2 to 3, 3 to 4, 4 to 5).
+  
+ Good Luck!

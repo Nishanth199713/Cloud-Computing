@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="styles.css" rel="stylesheet">
+      <title>Update</title>
+</head>
+<body>
+    <div class="container">
+      <h1>1001663569 Revathy, Ramamoorthy</h1>
+        <br>
+
+        <!-- <h3>new student added{{ res7 }}</h3> -->
+
+        <h3>max seats {{ res1 }}</h3>
+        <h3> seats left {{ res2 }}</h3>
+        <h3>Student info</h3>
+        <h3> Before {{ res7}}</h3>
+        <h3> After {{ res3 }}</h3>
+
+        <!-- <h3>all courses{{ crs }}</h3> -->      
+        <br>
+        <br>
+        <h1> List of courses the student is enrolled in </h1>
+        {#{% if table is not None %}#}
+          <table style="padding: 5px;text-align: left;width: 50%;border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                  <th> IdNum </th>
+                  <th> Course </th>
+                  <th> Section </th>
+                  <!-- <th> Days </th>
+                  <th> Start Time </th>
+                  <th> End Time </th>
+                  <th> Instructor </th>
+                  <th> Maxseats </th> -->
+            </thead>
+
+ 
+            <center>
+            <tbody>
+              {% for value in table %}
+            <tr>
+                  <td> {{ value['IdNum'] }} </td>
+                  <td> {{ value['Course'] }} </td>
+                  <td> {{ value['Section'] }} </td>
+                  
+                  <!-- <td> {{ value['Start Time'] }} </td>
+                  <td> {{ value['End Time'] }} </td>
+                  <td> {{ value['Instructor'] }} </td>
+                  <td> {{ value['Maxseats'] }} </td> -->
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      {#{% else %}#}
+          {#<div>No data available</div>#}
+      {#{% endif %}#}
+        </center>
+
+        <br>
+        <br>
+         <h1> Remaining credits for the student </h1>
+          {#{% if table1 is not None %}#}
+          <table style="padding: 5px;text-align: left;width: 50%;border: 1px solid black;border-collapse: collapse;">
+            <thead>
+                  <th> IdNum </th>
+                  <th> Fname </th>
+                  <th> Lname </th>
+                  <th> Age </th>
+                  <th> Credit </th>
+                  <th> NoOfClasses </th>
+            </thead>
+
+ 
+
+            <tbody>
+              {% for value in table1 %}
+            <tr>
+                  <td> {{ value['IdNum'] }} </td>
+                  <td> {{ value['Fname'] }} </td>
+                  <td> {{ value['Lname'] }} </td>
+                  <td> {{ value['Age'] }} </td>
+                  <td> {{ value['Credit'] }} </td>
+                  <td> {{ value['NoOfClasses'] }} </td>
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      {#{% else %}#}
+          {#<div>No data available</div>#}
+      {#{% endif %}#}
+
+      <br>
+      <br>
+      <br>
+    </div>
+</body>
+</html>

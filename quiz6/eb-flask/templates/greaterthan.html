@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <link href="styles.css" rel="stylesheet">
+      <title>Greater Than</title>
+</head>
+<body>
+    <div class="container">
+         <h1>1001663569 Revathy, Ramamoorthy</h1>
+        <br>
+        <p>No. of rows: {{rowcount}}</p>
+        <p>Time: {{elapsed_time}}</p>
+        <center>
+            {#{% if rows is not None %}#}
+<!--            {{rows}}  <br>-->
+   <table style="padding: 5px;text-align: left;">
+            <tr>
+                  <th>gmttime</th>
+                  <th>latitude</th>
+                  <th>longitude</th>
+                  <th>depth</th>
+                  <th>mag</th>
+                  <th>magType</th>
+                  <th>nst</th>
+                  <th>gap</th>
+                  <th>dmin</th>
+                  <th>rms</th>
+                  <th>net</th>
+                  <th>id</th>
+                  <th>updated</th>
+                  <th>place</th>
+                  <th>type</th>
+                  <th>horizontalError</th>
+                  <th>depthError</th>
+                  <th>magError</th>
+                  <th>magNst</th>
+                  <th>status</th>
+                  <th>locationsrc</th>
+                  <th>magSource</th>
+            </tr>
+            {% for rows in rows %}
+                <tr>
+                  <td> {{rows['gmttime']}} </td>
+                  <td> {{ rows['latitude'] }} </td>
+                  <td> {{ rows['longitude'] }} </td>
+                  <td> {{ rows['depth'] }} </td>
+                  <td> {{ rows['mag'] }} </td>
+                  <td> {{ rows['magType'] }} </td>
+                  <td> {{ rows['nst'] }} </td>
+                  <td> {{ rows['gap'] }} </td>
+                  <td> {{ rows['dmin'] }} </td>
+                  <td> {{ rows['rms'] }} </td>
+                  <td> {{ rows['net'] }} </td>
+                  <td> {{ rows['id'] }} </td>
+                  <td> {{ rows['updated'] }} </td>
+                  <td> {{ rows['place'] }} </td>
+                  <td> {{ rows['type'] }} </td>
+                  <td> {{ rows['horizontalError'] }} </td>
+                  <td> {{ rows['depthError'] }} </td>
+				  <td> {{ rows['magError'] }} </td>
+                  <td> {{ rows['magNst'] }} </td>
+                  <td> {{ rows['status'] }} </td>
+                  <td> {{ rows['locationsrc'] }} </td>
+                  <td> {{ rows['magSource'] }} </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+            {#{% else %}#}
+            {#<div>No data available</div>#}
+            {#{% endif %}#}
+        </center>
+        <br>
+        <br>
+    </div>
+</body>
+</html>

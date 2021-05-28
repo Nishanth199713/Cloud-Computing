@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="static/styles.css" rel="stylesheet">
+      <title>Scatter Chart</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <h1> 1001663569 Ramamoorthy, Revathy</h1>
+
+      <br>
+
+      <center>
+    </div>
+        <div id = "scatter" style = "width: 600px; height: 800px; margin: 0 auto">
+      </div>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type = "text/javascript">google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawsc);
+      function drawsc() {
+
+          var data = google.visualization.arrayToDataTable({{ rows1|safe }});
+          var options = {
+              'title': 'population',
+              hAxis: {title: 'Magnitude Range'},
+              vAxis: {title: 'Number of quakes'},
+              'width': 550,
+              'height': 400
+          };
+          var chart = new google.visualization.ScatterChart(document.getElementById('scatter'));
+          chart.draw(data, options);
+      }
+        </script>
+        </center>
+  </body>
+</html>

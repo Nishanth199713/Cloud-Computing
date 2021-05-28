@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>Home</title>
+    {% endif %}
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>IBM Cloud</h1>
+      <h2> Revathy Ramamoorthy </h2>
+      <h2> 1001663569 </h2>
+      <br>
+
+      <center>
+      {#{% if table is not None %}#}
+       {#{% if table is not None %}#}
+    <table>
+      <thead>
+      </thead>
+
+      <tbody>
+        {% for item in table %}
+      <tr>
+      <th id=td1> {{ item[0] }} </th>
+      <td id=td1> {{ item[1] }} </td>
+<img src="https://s3.us-south.cloud-object-storage.appdomain.cloud/cloud-object-storage-da-cos-standard-83d/{{filename}}" height="100" width="100">      <td id=td1> {{ item[2] }} </td>
+            <td id=td1> {{ item[3] }} </td>
+      </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{#{% else %}#}
+    {#<div>data not found</div>#}
+{#{% endif %}#}
+        </center>
+
+      <br>
+      <br>
+
+ </body>
+</html>

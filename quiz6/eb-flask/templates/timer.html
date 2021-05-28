@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+      <link href="styles.css" rel="stylesheet">
+      <title>Check Volcano Details</title>
+</head>
+<body>
+<br>
+            <h1><p id="demo"></p></h1>
+            <p id="demo1"></p>
+
+            <script>
+var today = new Date();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+document.getElementById("demo").innerHTML = time;
+</script>
+
+<br>
+    
+<div class="container">
+  <h1><div id="counter"></div></h1>
+  <button onclick="res()">Reset counter</button>
+  <script language="JavaScript">
+    let counter = document.getElementById('counter');
+    let count = -1
+
+
+    var count_event = setInterval(myCounter, 300);
+
+
+    function res() {
+      count = 0;
+    }
+
+
+    function myCounter() {
+      count += 1;
+      counter.innerHTML = count.toString();
+    }
+
+
+    function myTimer() {
+      var d = new Date();
+      time.innerHTML = d.toLocaleTimeString();
+    }
+  </script>
+
+
+    </div>
+
+
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

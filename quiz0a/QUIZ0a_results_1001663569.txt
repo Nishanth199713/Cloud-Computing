@@ -1,0 +1,71 @@
+QUESTION 1
+
+@app.route("/disp", methods=["POST", "GET"])
+def disp():
+	m1 = int(request.form.get('num', ''))
+	m2 = m1+69
+
+	return render_template('disp.html', row = m2, col = m1)
+
+     <h2>Input value : {{col}} </h2>
+     <h2>Result : {{row}}</h2>
+
+
+QUESTION 2a
+
+@app.route("/category", methods=["POST", "GET"])
+def category():
+	category = str(request.form.get('category', ''))
+	query1 = "SELECT item,quantity FROM grocery WHERE category = '" + str(category) + "'"
+	cursor.execute(query1)
+	r1 = cursor.fetchall()
+
+	return render_template('category.html', rows1=r1, category=category)
+
+	center>
+          <p> Category : {{category}} </p>
+          <p> List of items : {{ rows1 }}      </center>
+
+
+
+QUESTION 2b
+
+@app.route("/showpie", methods=["POST", "GET"])
+def showpie():
+	query1 = "SELECT count(*) FROM grocery WHERE category = 'veg'"
+	cursor.execute(query1)
+	r1 = cursor.fetchall()
+
+	query2 = "SELECT count(*) FROM grocery WHERE category = 'notveg'"
+	cursor.execute(query2)
+	r2 = cursor.fetchall()
+
+	rows = ([
+		['Category', 'Count'],
+		['Veg', r1[0][0]],
+		['NonVeg', r2[0][0]]
+		])
+
+	return render_template('showpie.html', rows=rows)
+
+	</div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable({{ rows|safe }});
+
+            var options = {
+                title: ' Pie chart showing Number of items in a given category',
+                pieSliceText: 'value',
+                legend: {position: 'labeled'}
+                {#colors: ['yellow','lightgray','orange']#}
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+        </script>

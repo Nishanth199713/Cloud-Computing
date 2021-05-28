@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="static/styles.css" rel="stylesheet">
+
+        <title>Home</title>
+    </head>
+    <body>
+        <div class="container">
+
+            <h1>1001663569 Revathy, Ramamoorthy</h1>
+            <br>
+
+             <p>***********************************************************************************************************************************************************************</p>
+            <div>
+              <h1>7.1</h1>
+                <br>
+            <h4>
+                 Check Volcano details
+            </h4> <br>
+            <form action="/volcanocheck" method="POST">
+            <label > Volcano number </label>
+            <input type="number"  name="vno" ><br>
+            <input type="submit" value="Volcano Details" class="btn btn-primary">
+            </form>
+            <br>
+
+ <p>***********************************************************************************************************************************************************************</p>
+  <h1>7.2</h1>
+        <p> Box - Latlong pair and country names <p>
+      <form action="/box" method="POST" >
+        <label> Location 1</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude1" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude1" step="any"> <br>
+        <label> Location 2</label> <br>
+        <label> Latitude:</label> <input type="number" name="latitude2" step="any"> <br>
+        <label> Longitude:</label> <input type="number" name="longitude2" step="any"> <br>
+        <input type="submit" value="Get box details" class="btn btn-primary"> 
+      </form>
+      <br>
+      <br>
+<p>***********************************************************************************************************************************************************************</p>
+<!-- 
+      <p> Elev range increment<p>
+      <form action="/elevrange" method="POST" >
+        <label> Elev Range </label> <br>
+        <label> Elev Range1: </label> <input type="number" name="elevStart" step="any"> <br>
+        <label> Elev Range2: </label> <input type="number" name="elevEnd" step="any"> <br>
+        <label> Increment: </label> <input type="number" name="increment" step="any"> <br>
+
+        <input type="submit" value="Get details" class="btn btn-primary"> 
+      </form>
+      <br>
+      <br>
+      <p>***********************************************************************************************************************************************************************</p>
+
+      <br>
+            <h4>
+                 Countrywise-regionwise Volcano details
+            </h4> <br>
+            <form action="/crwise" method="post">
+            <label > Region Name </label>
+            <input type="text"  name="region" ><br>
+            <label > Country Name </label>
+            <input type="text"  name="country" ><br>
+                <input type="submit" value="CR wise Volcano Details" class="btn btn-primary">
+            </form>
+            <br> -->
+      <!--   <form>
+         <button type="submit" formaction="https://www.w3docs.com">Enroll</button>
+      </form>
+
+      <br>
+
+      <form>
+         <button type="submit" formaction="https://www.w3docs.com">Display</button>
+      </form>
+
+         <form action="/register" method="POST" >
+            <h1><center><label > Sign up for course </label></center></h1>
+            <h3><label > Course details </label></h3><br>
+            <label > course id </label>
+            <input type="number"  name="id" >
+            <label > section </label>
+            <input type="number"  name="sec" >
+            <br>
+            <br>
+             <h3><label > Student details </label></h3><br>
+             <br>
+            <label > sid </label>
+            <input type="number"  name="idnum" >
+            <label > fname </label>
+            <input type="text"  name="fname" >
+            <label > lname </label>
+            <input type="text"  name="lname" >
+             <label > age </label>
+            <input type="number"  name="age" >
+            <input type="submit" value="submit"><br><br>
+         </form>
+            <br> -->
+            <p>***********************************************************************************************************************************************************************</p>
+            
+<h1> Q6 - Set </h1>
+<form action="/set" method="POST">
+       
+            <input type="submit" value="Set" class="btn btn-primary">
+            </form>
+
+
+
+            <p>***********************************************************************************************************************************************************************</p>
+            
+<h1> Q6 - Display </h1>
+<form action="/timer" method="POST">
+       
+            <input type="submit" value="Display timer" class="btn btn-primary">
+            </form>
+
+            
+
+
+
+
+
+
+
+
+
+
+            <!-- <h4>
+                 Greater than
+            </h4> <br>
+            <form action="/greaterthan" method="post">
+                <label>Magnitude: </label> <input type="number" name="range1" step="any"><br><br>
+                <input type="submit" value="Search" class="btn btn-primary">
+            </form>
+            <br>
+            <p>***********************************************************************************************************************************************************************</p>
+            <br>
+            <h4>
+                 Within Range
+            </h4> <br>
+            <form action="/withinrange" method="post">
+                <label> Magnitude </label><br>
+                <label>Range1: </label> <input type="number" name="range1" step="any"><br>
+                <label>Range2: </label> <input type="number" name="range2" step="any"> <br>
+                <input type="submit" value="Search" class="btn btn-primary">
+            </form>
+            <br>
+            <p>***********************************************************************************************************************************************************************</p>
+            <br>
+            <h4>
+                 Update
+            </h4> <br>
+            <form action="/update" method="post">
+                <label> Depth </label><br>
+                <label>Range1: </label> <input type="number" name="range1" step="any"><br>
+                <label>Range2: </label> <input type="number" name="range2" step="any"> <br>
+                <label>Start Date: </label> <input type="text" name="startdate"><br>
+                <label>End Date: </label> <input type="text" name="enddate"> <br>
+                <label>Magnitude: </label> <input type="number" name="mag" step="any"> <br>
+                <input type="submit" value="Update" class="btn btn-primary">
+            </form>
+            <br>
+            <p>***********************************************************************************************************************************************************************</p>
+            <br>
+            <h4>
+                 latlon
+            </h4> <br>
+            <form action="/latlon" method="post">
+                <label>Latitude: </label> <input type="number" name="latitude" step="any"><br>
+                <label>Longitude: </label> <input type="number" name="longitude" step="any"> <br>
+                <label>Distance: </label> <input type="number" name="distance" step="any"><br>
+                <input type="submit" value="Search" class="btn btn-primary">
+            </form>
+            <br>
+            <p>***********************************************************************************************************************************************************************</p>
+            <br>
+            <br>
+            <p>***********************************************************************************************************************************************************************</p>
+            <br>
+ -->
+        </div>
+    </body>
+</html>
